@@ -1,0 +1,153 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" type="image/png" href="icons/favicon-32x32.png"/>
+    <title>DAA@MIT</title>
+</head>
+<body>
+    <script type="text/javascript" src="script.js"></script>
+    <div id="banner">
+        <div class="parallax"></div>
+        <a href="#about"><img src="img/logo_transparent.png" class="logo"/></a>
+        <div class="Chevron"></div>
+    </div>
+    <div id="navbar">
+        <img src="img/logo_square_white.png" class="nav-icon"/>
+        <span id="navlinks" class="nav-container">
+            <a href="#about">About</a> <span class="desktop-only">| </span>
+            <a href="#schedule">Schedule</a> <span class="desktop-only">| </span>
+            <a href="#gallery">Gallery</a>
+        </span>
+        <span>
+            <a href="mailto:daamit-exec@mit.edu">
+                <img src="icons/envelope.svg" class="nav-icon"/>
+            </a>
+            &nbsp;
+            <a href="https://www.facebook.com/mitanimationgroup">
+                <img src="icons/facebook-f.svg" class="nav-icon"/>
+            </a>
+        </span>
+    </div>
+    <div class="title" id="about">About</div>
+    <section>
+        <div>
+            <p class="long-text">
+                Digital Art and Animation at MIT<br class="break"/>
+                (DAA@MIT or DAAMIT) is home to many of MIT's aspiring and experienced digital artists!
+                Our club works to foster the digital arts community at MIT by providing people with the resources and peers needed to engage with digital art.
+                <br/>
+                If you're interested in making comics, animation, 3D modeling, or simply learning how to use that drawing tablet for something other than Osu, you're welcome here!
+                <br/>
+                Previous events include a talk and Q&A in 2019 with webcomic artist <a href="https://twitter.com/shenanigansen">Shen Comix</a>, and one in 2018 with the animation studio Thought Cafe.
+                <br/>
+                (Note: we used to be called the MIT Animation Group (MITAG), so if you're looking for them, you're in the right place!)
+                <br/>
+                <a href="https://forms.gle/pzYuNmQg5C2vT4o47">SIGN UP FOR OUR INTEREST LIST HERE</a>
+            </p>
+        </div>
+        <div class="sub-title">Exec Board</div>
+        <div id="exec">
+            <div class="member">
+                <img src="img/exec-president.jpg">
+                <p class="member-name">Heya Lee<br/>President</p>
+            </div>
+            <div class="member">
+                <img src="img/exec-treasurer.jpg">
+                <p class="member-name">Bowen Wu<br/>Treasurer</p>
+            </div>
+            <div class="member">
+                <img src="img/exec-outreach.jpg">
+                <p class="member-name">Raphi Kang<br/>Outreach</p>
+            </div>
+            <div class="member">
+                <img src="img/exec-webmaster.jpg">
+                <p class="member-name">Amani Toussaint<br/>Webmaster</p>
+            </div>
+        </div>
+    </section>
+    <div class="title" id="schedule">Schedule</div>
+    <section>
+        <div class="sub-title">September 2020 Challenge:</div>
+        <p>TBA :)</p>
+        <p>Take a look at some submissions for our previous challenges in <a href="#gallery">the gallery</a></p>
+        <div class="sub-title">Weekly Meetings:</div>
+        <p>Come draw with us on Saturdays at 3 PM EDT
+            <br/>Contact us at <a href="mailto:daamit-exec@mit.edu">daamit-exec@mit.edu</a> for access to the club Discord server
+        </p>
+        <div class="sub-title">Other Events:</div>
+            <p>TBA :)</p>
+    </section>
+    <div class="title" id="gallery">Gallery</div>
+    <section id="gallery-view">
+        
+        <div class="gallery-item" onmouseenter="showOverlay(this, 0)">
+            <img src="gallery/bowen-wu-reading-map.png" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 1)">
+            <img src="gallery/brinley-zhao-cloud-light.jpg" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 2)">
+            <img src="gallery/skylar-larsen-seasons.png" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 3)">
+            <img src="gallery/aria-kydd-eclipse.jpg" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 4)">
+            <img src="gallery/jamboard-8-22-2020-cat.png" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 5)">
+            <img src="gallery/raphi-kang-daamit.png" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 6)">
+            <img src="gallery/bowen-wu-dragonfly.jpg" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 7)">
+            <img src="gallery/amani-toussaint-hand.gif" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 8)">
+            <video autoplay loop muted playsinline class="gallery-media">
+                <source src="gallery/bowen-wu-sharingan.mp4" type="video/mp4"/>
+            </video>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 9)">
+            <img src="gallery/shen-meetup.jpg" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 10)">
+            <img src="gallery/mitag-shen-collab.jpg" class="gallery-media"/>
+        </div>
+
+        <div class="gallery-item" onmouseenter="showOverlay(this, 11)">
+            <img src="gallery/first-meeting-2019.jpg" class="gallery-media"/>
+        </div>
+        
+        
+
+    </section>
+    <div id="modal" class="modal-hidden">
+        <div class="modal-content">
+            <div id="piece">
+            </div>
+            <div id="modal-info">
+
+            </div>
+        </div>
+    </div>
+    <div id="gallery-overlay" style="display: none;">
+        <div class="gallery-info">
+        </div>
+    </div>
+    <script type="text/javascript">onload();</script>
+</body>
+</html>
