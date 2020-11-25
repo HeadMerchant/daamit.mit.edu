@@ -87,6 +87,7 @@ def handleVideo(srcPath, destPath, fileName):
     fileExtension = os.path.splitext(fileName)[1]
     if USE_MP4:
         destPath = destPath[:-len(fileExtension)] + ".mp4"
+        save = lambda vid, path: mpeditor.VideoClip.write_videofile(vid, path, codec="mpeg4")
         save = mpeditor.VideoFileClip.write_videofile#lambda vid, path: mpeditor.VideoClip.write_videofile
     else:
         destPath = destPath[:-len(fileExtension)] + ".gif"
