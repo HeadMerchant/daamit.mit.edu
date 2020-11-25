@@ -43,8 +43,13 @@ def handleHTML(srcPath, destPath, fileName):
                     vid_src["type"] = "video/mp4"
                     galleryMedia.append(vid_src)
                 else:
+                    from PIL import Image
                     galleryMedia = soup.new_tag("img")
                     galleryMedia["src"] = f"{GALLERY_DIR}/{destName}"
+                    # lazy-load images
+                    galleryMedia["loading"] = "lazy"
+                    image = Image.open(os.path.join(SRC_DIR, GALLERY_DIR, destName))
+                    galleryMedia["width"], galleryMedia["height"] = image.width, image.height
             else:
                 if fileExtension == "mp4":
                     destName = destName[:-len(fileExtension)]+"gif"
