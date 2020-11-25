@@ -13,7 +13,7 @@ body{
     font-size: 16px;
 }
 a{
-    color: #ffffff;
+    color: #616ED1;
     text-decoration: none;
     font-weight: bold;
 }
@@ -108,10 +108,10 @@ section{
     z-index: 3;
 }
 @supports (backdrop-filter: blur(10px)){
-    #navbar{
+    /* #navbar{
         background-color: rgba(53, 53, 53, 0.6);
         backdrop-filter: saturate(180%) blur(20px);
-    }
+    } */
     .modal{
         backdrop-filter: blur(5px) contrast(50%);
     }
@@ -240,8 +240,7 @@ section{
     margin: auto;
 }
 .long-text{
-    padding-left: 30px;
-    padding-right: 30px;
+    text-align: left;
 }
 @media only screen and (min-width: 500px){
     .member{
@@ -252,6 +251,10 @@ section{
     }
 }
 @media only screen and (min-width: 768px){
+    .long-text{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
     .parallax{
         background-attachment: fixed;
     }
