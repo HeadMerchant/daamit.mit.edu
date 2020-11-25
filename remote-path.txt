@@ -1,2 +1,0 @@
-athena.dialup.mit.edu:/afs/athena/activity/a/ag/web_scripts
-amanit

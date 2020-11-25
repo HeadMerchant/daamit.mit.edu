@@ -39,13 +39,13 @@ def handleHTML(srcPath, destPath, fileName):
                     galleryMedia["autoplay"], galleryMedia["muted"], galleryMedia["loop"], galleryMedia["playsinline"] = \
                         (None,) * 4
                     vid_src = soup.new_tag("source")
-                    vid_src["src"] = f"{GALLERY_DIR}/{destName}"
+                    vid_src["src"] = os.path.join(GALLERY_DIR, destName)
                     vid_src["type"] = "video/mp4"
                     galleryMedia.append(vid_src)
                 else:
                     from PIL import Image
                     galleryMedia = soup.new_tag("img")
-                    galleryMedia["src"] = f"{GALLERY_DIR}/{destName}"
+                    galleryMedia["src"] = os.path.join(GALLERY_DIR, destName)
                     # lazy-load images
                     galleryMedia["loading"] = "lazy"
                     image = Image.open(os.path.join(SRC_DIR, GALLERY_DIR, destName))
@@ -54,7 +54,7 @@ def handleHTML(srcPath, destPath, fileName):
                 if fileExtension == "mp4":
                     destName = destName[:-len(fileExtension)]+"gif"
                 galleryMedia = soup.new_tag("img")
-                galleryMedia["src"] = f"{GALLERY_DIR}/{destName}"
+                galleryMedia["src"] = os.path.join(GALLERY_DIR, destName)
 
             galleryItem = soup.new_tag("div")
             galleryItem["onmouseenter"], galleryItem["class"]=\
@@ -176,14 +176,14 @@ FILE_HANDLERS = {
 #return: list of output directories (relative paths)
 def handleFile(fileName, relPath, outDir, srcDir=SRC_DIR):
     print(relPath)
-    srcPath = f"{srcDir}/{relPath}"
-    destPath = f"{outDir}/{relPath}"
+    srcPath = os.path.join(srcDir, relPath)
+    destPath = os.path.join(outDir, relPath)
 
     if os.path.isdir(srcPath):
         os.makedirs(destPath, mode=0o777)
         for subFileName in os.listdir(srcPath):
             print(subFileName)
-            _ = handleFile(subFileName, f"{relPath}/{subFileName}", outDir, srcDir)
+            _ = handleFile(subFileName, os.path.join(relPath, subFileName), outDir, srcDir)
         return [relPath]
 
     
@@ -202,7 +202,7 @@ def package():
         handleFile(fileName, fileName, DIST_DIR, SRC_DIR)
 
 def deploy():
-    with open("remote-path.txt", "r") as f:
+    with open("remote-info.txt", "r") as f:
         info = f.read().split('\n')
         URL = info[0]
         ATHENA_USERNAME = info[1] if len(info) > 1\
