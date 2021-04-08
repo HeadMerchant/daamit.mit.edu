@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -5,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <link rel="icon" type="image/png" href="icons/favicon-32x32.png"/>
     <title>DAA@MIT</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
 </head>
 <body>
     <script type="text/javascript" src="script.js"></script>
@@ -14,21 +16,22 @@
         <div class="Chevron"></div>
     </div>
     <div id="navbar">
-        <span id="navlinks" class="nav-container">
-            <a href="#about">About</a> <span class="desktop-only">| </span>
-            <a href="#schedule">Schedule</a> <span class="desktop-only">| </span>
+
+        <span class="nav-container">
+            <a href="#">DAA@MIT</a>
+        </span>
+        <span id="navlinks" class="desktop-only">
+            <a href="#about">About</a> | 
+            <a href="#schedule">Schedule</a> | 
             <a href="#gallery">Gallery</a>
         </span>
         <span>
-            <a href="mailto:daamit-exec@mit.edu">
-                <img src="icons/envelope.svg" class="nav-icon"/>
-            </a>
-            &nbsp;
-            <a href="https://www.facebook.com/mitanimationgroup">
-                <img src="icons/facebook-f.svg" class="nav-icon"/>
-            </a>
+            <a class="nav-link nav-icon" href="mailto:daamit-exec@mit.edu"><i class="far fa-envelope"></i></a>
+            <a class="nav-link nav-icon" href="https://www.facebook.com/mitanimationgroup"><i class="fab fa-facebook-f"></i></a>
+            <a class="nav-link nav-icon" href="https://www.instagram.com/daa.mit/"><i class="fab fa-instagram"></i></a>
         </span>
     </div>
+    <div class="main-content">
     <div class="title" id="about">About</div>
     <section>
         <div>
@@ -62,15 +65,17 @@
                 <img src="img/exec-webmaster.jpg">
                 <p class="member-name">Amani Toussaint<br/>Webmaster</p>
             </div>
+            <div class="member">
+                <img src="img/exec-publicity.jpg">
+                <p class="member-name">Yijun Yang<br/>Publicity</p>
+            </div>
         </div>
     </section>
     <div class="title" id="schedule">Schedule</div>
     <section>
-        <div class="sub-title">November 2020 Challenge:</div>
+        <div class="sub-title">April 2021 Challenge:</div>
         <p class="long-text">
-            <a href="https://youtu.be/KxcIXNrzu4s?t=57">
-                Video Pose Breakdown + Reconstruction
-            </a>
+            Art Timelapse
         </p>
         <div class="sub-title">Weekly Meetings:</div>
         <p class="long-text">
@@ -82,6 +87,7 @@
             <p>TBA :)</p>
     </section>
     <div class="title" id="gallery">Gallery</div>
+    </div>
     <section id="gallery-view">
         
         <div class="gallery-item" onmouseenter="showOverlay(this, 0)">
