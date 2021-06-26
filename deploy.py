@@ -3,6 +3,16 @@ import shutil
 import sys
 import bs4
 
+import moviepy.editor as mpeditor
+import ffmpeg
+from css_html_js_minify import css_minify
+from css_html_js_minify import js_minify
+
+from css_html_js_minify import html_minify
+
+from PIL import Image
+import csv
+
 # MEDIA_WIDTHS = [200, 400, 600, 800]
 MAX_DIMESIONS_EXEC = (120, 120)
 MAX_DIMESIONS_GALLERY = (720, 720)
@@ -20,7 +30,6 @@ for root, dirs, files in os.walk(SRC_DIR):
         os.chmod(os.path.join(root, f), 0o777)
 
 def handleHTML(srcPath, destPath, fileName):
-    from css_html_js_minify import html_minify
     with open(srcPath) as f:
         text = f.read()
         soup = bs4.BeautifulSoup(text)
@@ -43,7 +52,6 @@ def handleHTML(srcPath, destPath, fileName):
                     vid_src["type"] = "video/mp4"
                     galleryMedia.append(vid_src)
                 else:
-                    from PIL import Image
                     galleryMedia = soup.new_tag("img")
                     galleryMedia["src"] = os.path.join(GALLERY_DIR, destName)
                     # lazy-load images
@@ -67,14 +75,12 @@ def handleHTML(srcPath, destPath, fileName):
         makeTextFile(destPath, text)
         return [destPath]
 def handleCSS(srcPath, destPath, fileName):
-    from css_html_js_minify import css_minify
     with open(srcPath) as f:
         text = f.read()
         min_css = css_minify(text)
         makeTextFile(destPath, min_css)
         return [destPath]
 def handleJS(srcPath, destPath, fileName):
-    from css_html_js_minify import js_minify
     with open(srcPath) as f:
         galleryInfoLine = "var galleryInfo=["
         for galleryItem in genGallery():
@@ -87,31 +93,39 @@ def handleJS(srcPath, destPath, fileName):
         makeTextFile(destPath, min_js)
         return [destPath]
 def handleVideo(srcPath, destPath, fileName):
-    import moviepy.editor as mpeditor
-    vid = mpeditor.VideoFileClip(srcPath)
+    width, height = mpeditor.VideoFileClip(srcPath).size
+    vid = ffmpeg.input(srcPath).crop(0, 0, (width//2)*2, (height//2)*2)
+    # vid = 
     fileExtension = os.path.splitext(fileName)[1]
     if USE_MP4:
         destPath = destPath[:-len(fileExtension)] + ".mp4"
-        save = lambda vid, path: mpeditor.VideoClip.write_videofile(vid, path, codec="mpeg4")
-        save = mpeditor.VideoFileClip.write_videofile#lambda vid, path: mpeditor.VideoClip.write_videofile
+        # save = lambda vid, path: mpeditor.VideoClip.write_videofile(vid, path, codec="mpeg4")
+        save = lambda vid, path:\
+            vid\
+            .output(destPath, vcodec="libx264", format="mp4", video_bitrate=0, pix_fmt='yuv420p')\
+            .run()
+        # save = mpeditor.VideoFileClip.write_videofile#lambda vid, path: mpeditor.VideoClip.write_videofile
     else:
-        destPath = destPath[:-len(fileExtension)] + ".gif"
-        save = mpeditor.VideoFileClip.write_gif
+        # destPath = destPath[:-len(fileExtension)] + ".gif"
+        # save = mpeditor.VideoFileClip.write_gif
+        pass
     
-    for size in thumbnailSizes(vid.w, vid.h, [MAX_DIMESIONS_GALLERY]):
-        if size != None:
-            if size[0] < vid.w:
-                newClip = vid.resize(width=size[0])
-            else:
-                newClip = vid.resize(height=size[1])
-        else:
-            newClip = vid
+    save(vid, destPath)
+    os.chmod(destPath, 0o777)
+    return [destPath]
+    # for size in thumbnailSizes(vid.w, vid.h, [MAX_DIMESIONS_GALLERY]):
+    #     if size != None:
+    #         if size[0] < vid.w:
+    #             newClip = vid.resize(width=size[0])
+    #         else:
+    #             newClip = vid.resize(height=size[1])
+    #     else:
+    #         newClip = vid
         
-        save(newClip, destPath)
-        os.chmod(destPath, 0o777)
-        return [destPath]
+    #     save(newClip, destPath)
+    #     os.chmod(destPath, 0o777)
+    #     return [destPath]
 def handleImage(srcPath, destPath, fileName):
-    from PIL import Image
     if fileName.startswith("exec-"):
         image = Image.open(srcPath)
         for size in thumbnailSizes(image.width, image.height, [MAX_DIMESIONS_EXEC]):
@@ -135,7 +149,6 @@ def makeTextFile(path, contents):
     with open(path, "w") as f:
         f.write(contents)
 def genGallery():
-    import csv
     # class GalleryInfo:
     #     def __init__(self, filePath, artist, description, shortDesc):
     #         self.filePath = filePath

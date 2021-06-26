@@ -89,7 +89,7 @@ a{
     font-size: 15pt;
     text-align: left;
 }
-.title, .sub-title{
+.title, .sub-title, #modal-info{
     color: #fff;
 }
 #navbar{
